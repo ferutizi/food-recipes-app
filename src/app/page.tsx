@@ -39,18 +39,19 @@ export default function Home() {
 			<section className='flex flex-wrap justify-center gap-12'>
 				{ recipes.length !== 0 ? (
 					recipes.map((e) => 
-						<article key={e.idMeal} className='w-96 bg-zinc-800 text-white'>
-							<h2 key={e.idMeal} >{e.strMeal}</h2>
-							<div className='h-72'>
+						<article key={e.idMeal} className='w-96 bg-stone-100 rounded-2xl'>
+							<div className='h-72 rounded-2xl rounded-ee-none overflow-hidden'>
 								<img className='object-cover h-full w-full' src={e.strMealThumb} title={e.strMeal} alt={e.strMeal} />
+								<h2 className='text-2xl p-4 pt-2 pb-0 rounded-t-2xl text-black z-10 -translate-y-10 absolute bg-stone-100' key={e.idMeal} >{e.strMeal}</h2>
 							</div>
-							<div className='flex flex-wrap gap-2 p-4'>
-								<Ingredient ingredient={e.strIngredient1} />
-								<Ingredient ingredient={e.strIngredient2} />
-								<Ingredient ingredient={e.strIngredient3} />
-								<Ingredient ingredient={e.strIngredient4} />
-								<Ingredient ingredient={e.strIngredient5} />
-								<Ingredient ingredient={e.strIngredient6} />
+							<div className='z-20'>
+								<div className='flex flex-wrap gap-2 p-4 z-20'>
+									<Ingredient ingredient={e.strIngredient1} />
+									<Ingredient ingredient={e.strIngredient2} />
+									<Ingredient ingredient={e.strIngredient3} />
+									<Ingredient ingredient={e.strIngredient4} />
+									<Ingredient ingredient='...' />
+								</div>
 							</div>
 						</article>
 					))
