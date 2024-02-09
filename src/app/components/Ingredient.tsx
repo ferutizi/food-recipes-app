@@ -18,7 +18,7 @@ export default function Ingredients({ingredient}: IngredientProps) {
 
 	return(
 		ingredient.length !== 0 ?
-			<p className={`m-0 px-2 py-1 bg- rounded-xl ${textColor} ${color}`}>{ingredient}</p>
+			<p className={`m-0 px-2 py-1 bg- rounded-xl truncate max-w-36 ${textColor} ${color}`}>{ingredient}</p>
 			: <></>
 	)
 }

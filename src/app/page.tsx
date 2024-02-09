@@ -25,9 +25,11 @@ export interface Recipe {
 
 export default function Home() {
 	const [query, setQuery] = useState<string>('')
-	const [fetchData, fetchByName, recipes] = useFetchRecipes()
+	const [loading, setLoading] = useState<boolean>(true)
+	const [fetchData, fetchByName, recipes] = useFetchRecipes(setLoading)
 
 	useEffect(() => {
+		setLoading(true)
 		fetchData()
 	}, [])
 
@@ -37,6 +39,7 @@ export default function Home() {
 
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		setLoading(true)
 		fetchByName(query)
 	}
 
@@ -55,7 +58,9 @@ export default function Home() {
 				</form>
 			</section>
 			<section className='flex flex-wrap justify-center gap-12'>
-				{ recipes? (
+				{loading ? (
+					<p>Loading...</p>
+				) : recipes && recipes.length > 0 ? (
 					recipes.map((e) => 
 						<article key={e.idMeal} className='w-96 bg-stone-100 rounded-2xl'>
 							<div className='h-72 rounded-2xl rounded-ee-none overflow-hidden'>
@@ -73,7 +78,8 @@ export default function Home() {
 							</div>
 						</article>
 					))
-					: (<p>No recipe found for that food :C</p>)
+					:
+					<p>{query ? 'No recipes found for that food :C' : 'Enter a food to search for recipes'}</p>
 				}
 			</section>
 		</main>

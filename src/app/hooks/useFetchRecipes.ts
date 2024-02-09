@@ -1,7 +1,7 @@
 import { Recipe } from '../page'
 import { useState } from 'react'
 
-export default function useFetchRecipes() {
+export default function useFetchRecipes(setLoading: (loading: boolean) => void) {
 	const [recipes, setRecipes] = useState<Recipe[]>([])
 
 	const fetchData = async () => {
@@ -13,6 +13,8 @@ export default function useFetchRecipes() {
 			setRecipes(data.meals)
 		} catch (error) {
 			console.log(error)
+		} finally {
+			setLoading(false)
 		}
 	}
 
@@ -26,6 +28,8 @@ export default function useFetchRecipes() {
 			setRecipes(data.meals)
 		} catch (error) {
 			console.log(error)
+		} finally {
+			setLoading(false)
 		}
 	}
 
