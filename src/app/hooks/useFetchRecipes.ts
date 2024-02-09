@@ -16,5 +16,18 @@ export default function useFetchRecipes() {
 		}
 	}
 
-	return[fetchData, recipes] as const
+	const fetchByName = async (query: string) =>  {
+		try {
+			const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
+			console.log(res)
+			if(!res.ok) throw new Error('food not finded')
+
+			const data = await res.json()
+			setRecipes(data.meals)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	return[fetchData, fetchByName, recipes] as const
 }
