@@ -1,51 +1,22 @@
-'use client'
-
 import './globals.css'
-import { useEffect, useState } from 'react'
+/* import { useState } from 'react' */
 import useFetchRecipes from './hooks/useFetchRecipes'
 import Ingredient from './components/Ingredient'
+import SearchBox from './components/searchBox'
 
-export interface Recipe {
-	idMeal: string,
-	strMeal: string,
-	strMealThumb: string,
-	strIngredient1: string,
-	strIngredient2: string,
-	strIngredient3: string,
-	strIngredient4: string,
-	strIngredient5: string,
-	strIngredient6: string,
-	strIngredient7: string,
-	strIngredient8: string,
-	strIngredient9: string,
-	strIngredient10: string,
-	strIngredient11: string,
-	strIngredient12: string,
-}
-
-export default function Home() {
-	const [query, setQuery] = useState<string>('')
-	const [loading, setLoading] = useState<boolean>(true)
+export default async function Home({searchParams}: {searchParams: {q: string}}) {
+/* 	const [query, setQuery] = useState<string>('')
 	const [showIngredients, setShowIngredients] = useState<boolean>(false)
-	const [selectedRecipe, setSelectedRecipe] = useState<string>()
-	const [fetchData, fetchByName, recipes] = useFetchRecipes(setLoading)
+	const [selectedRecipe, setSelectedRecipe] = useState<string>() */
+	const [fetchByName] = await useFetchRecipes()
+	const recipes = await fetchByName(searchParams.q || '')
 
-	useEffect(() => {
-		setLoading(true)
-		fetchData()
-	}, [])
-
-	useEffect(() => {
-		console.log(recipes)
-	}, [recipes])
-
-	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e: React.FormEvent<HTMLFormElement>) => {
+	/* 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		setLoading(true)
-		fetchByName(query)
-	}
+		recipes = await fetchByName(query)
+	} */
 
-	const showAllIngredients = (id: Recipe['idMeal']) => {
+	/* 	const showAllIngredients = (id: Recipe['idMeal']) => {
 		setShowIngredients(true)
 		setSelectedRecipe(id)
 	}
@@ -53,37 +24,26 @@ export default function Home() {
 	const hideAllIngredients = () => {
 		setShowIngredients(false)
 		setSelectedRecipe('')
-	}
+	} */
 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<section className='flex flex-col items-center'>
 				<h1 className='text-4xl font-semibold m-8'>What do you feel like having today</h1>
-				<form onSubmit={handleSubmit}>
-					<input 
-						className='m-8 w-96 h-10 rounded-2xl outline-none pl-4 text-black'
-						name='search'
-						type='text'
-						placeholder='Search for your dream recipe...'
-						onChange={e => setQuery(e.target.value)}
-						autoFocus
-					/>
-				</form>
+				<SearchBox />
 			</section>
 			<section className='flex flex-wrap justify-center gap-12'>
-				{loading ? (
-					<p>Loading...</p>
-				) : recipes && recipes.length > 0 ? (
+				{recipes && recipes.length > 0 ? (
 					recipes.slice(0, 15).map((e) => 
 						<article
 							key={e.idMeal}
-							onMouseLeave={() => hideAllIngredients()}
+							/* onMouseLeave={() => hideAllIngredients()} */
 							className='w-96 bg-stone-100 rounded-2xl'
 						>
 							<div className='h-72 rounded-2xl rounded-ee-none overflow-hidden'>
 								<img className='object-cover h-full w-full' src={e.strMealThumb} title={e.strMeal} alt={e.strMeal} />
 							</div>
-							<h2 className='text-2xl font-semibold p-4 pt-2 pb-2 rounded-t-2xl shadow-inset text-black -translate-y-10 absolute truncate w-72 bg-stone-100' key={e.idMeal} >{e.strMeal}</h2>
+							<h2 className='text-2xl font-semibold max-w-72 p-4 pt-2 pb-2 rounded-t-2xl shadow-inset text-black -translate-y-10 absolute truncate bg-stone-100' key={e.idMeal} >{e.strMeal}</h2>
 							<div>
 								<div className='flex flex-wrap gap-2 p-4'>
 									<Ingredient ingredient={e.strIngredient1} />
@@ -92,7 +52,7 @@ export default function Home() {
 									<Ingredient ingredient={e.strIngredient4} />
 
 									{/* Hidden '...' for focused card that show all ingredients */}
-									{e.strIngredient5 !== '' && (!showIngredients || e.idMeal !== selectedRecipe) &&
+									{/* 									{e.strIngredient5 !== '' && (!showIngredients || e.idMeal !== selectedRecipe) &&
 										<p
 											onMouseEnter={() => showAllIngredients(e.idMeal)}
 											className={'m-0 px-2 py-1 bg- rounded-xl cursor-pointer text-white bg-black'}
@@ -110,13 +70,13 @@ export default function Home() {
 											<Ingredient ingredient={e.strIngredient11} />
 											<Ingredient ingredient={e.strIngredient12} />
 										</>
-									}
+									} */}
 								</div>
 							</div>
 						</article>
 					))
 					:
-					<p>{query && 'No recipes found for that food :C'}</p>
+					<p>No recipes found for that food :C</p>
 				}
 			</section>
 		</main>
