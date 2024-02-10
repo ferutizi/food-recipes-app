@@ -1,8 +1,6 @@
-import { Recipe } from '../page'
-import { useState } from 'react'
+import Recipe from '../types/types'
 
-export default function useFetchRecipes(setLoading: (loading: boolean) => void) {
-	const [recipes, setRecipes] = useState<Recipe[]>([])
+export default async function useFetchRecipes() {
 
 	const fetchData = async () => {
 		try {
@@ -10,11 +8,10 @@ export default function useFetchRecipes(setLoading: (loading: boolean) => void) 
 			if(!res.ok) throw new Error('fetch failed ')
   
 			const data = await res.json()
-			setRecipes(data.meals)
+			const recipes: Promise<Recipe[]> = data.meals
+			return recipes
 		} catch (error) {
 			console.log(error)
-		} finally {
-			setLoading(false)
 		}
 	}
 
@@ -25,13 +22,12 @@ export default function useFetchRecipes(setLoading: (loading: boolean) => void) 
 			if(!res.ok) throw new Error('food not finded')
 
 			const data = await res.json()
-			setRecipes(data.meals)
+			const recipes: Promise<Recipe[]> = data.meals
+			return recipes
 		} catch (error) {
 			console.log(error)
-		} finally {
-			setLoading(false)
 		}
 	}
 
-	return[fetchData, fetchByName, recipes] as const
+	return [fetchByName] as const
 }
