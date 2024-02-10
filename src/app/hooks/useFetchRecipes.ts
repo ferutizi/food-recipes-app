@@ -2,7 +2,7 @@ import Recipe from '../types/types'
 
 export default async function useFetchRecipes() {
 
-	const fetchData = async () => {
+	/* 	const fetchData = async () => {
 		try {
 			const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
 			if(!res.ok) throw new Error('fetch failed ')
@@ -13,7 +13,7 @@ export default async function useFetchRecipes() {
 		} catch (error) {
 			console.log(error)
 		}
-	}
+	} */
 
 	const fetchByName = async (query: string) =>  {
 		try {
