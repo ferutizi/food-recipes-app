@@ -1,8 +1,8 @@
 import './globals.css'
 import useFetchRecipes from './hooks/useFetchRecipes'
-import Ingredient from './components/Ingredient'
 import SearchBox from './components/searchBox'
 import AllIngredients from './components/AllIngredients'
+import Link from 'next/link'
 
 export default async function Home({searchParams}: {searchParams: {q: string}}) {
 	const [fetchByName] = await useFetchRecipes()
@@ -17,16 +17,17 @@ export default async function Home({searchParams}: {searchParams: {q: string}}) 
 			<section className='flex flex-wrap justify-center gap-12'>
 				{recipes && recipes.length > 0 ? (
 					recipes.slice(0, 15).map((e) => 
-						<article
-							key={e.idMeal}
-							className='w-96 bg-stone-100 rounded-2xl'
-						>
-							<div className='h-72 rounded-2xl rounded-ee-none overflow-hidden'>
-								<img className='object-cover h-full w-full' src={e.strMealThumb} title={e.strMeal} alt={e.strMeal} />
-							</div>
-							<h2 className='text-2xl font-semibold max-w-72 p-4 pt-2 pb-2 rounded-t-2xl shadow-inset text-black -translate-y-10 absolute truncate bg-stone-100' key={e.idMeal} >{e.strMeal}</h2>
-							<AllIngredients e={e} />
-						</article>
+						<Link key={e.idMeal} href={`/${e.idMeal}`}>
+							<article
+								className='w-96 bg-stone-100 rounded-2xl'
+							>
+								<div className='h-72 rounded-2xl rounded-ee-none overflow-hidden'>
+									<img className='object-cover h-full w-full' src={e.strMealThumb} title={e.strMeal} alt={e.strMeal} />
+								</div>
+								<h2 className='text-2xl font-semibold max-w-72 p-4 pt-2 pb-2 rounded-t-2xl shadow-inset text-black -translate-y-10 absolute truncate bg-stone-100' key={e.idMeal} >{e.strMeal}</h2>
+								<AllIngredients e={e} />
+							</article>
+						</Link>
 					))
 					:
 					<p>No recipes found for that food :C</p>
