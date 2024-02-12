@@ -36,7 +36,7 @@ export default function AllIngredients({e}: AllIngredientsProps) {
 	]
 
 	return(
-		<div onMouseLeave={hideAllIngredients} className='flex flex-wrap gap-2 p-4'>
+		<div onMouseLeave={hideAllIngredients} className='flex flex-wrap gap-2 p-4 min-h-28'>
 			<Ingredient ingredient={e.strIngredient1} />
 			<Ingredient ingredient={e.strIngredient2} />
 			<Ingredient ingredient={e.strIngredient3} />
@@ -46,7 +46,7 @@ export default function AllIngredients({e}: AllIngredientsProps) {
 			{e.strIngredient5 !== '' && e.strIngredient5 !== null && (!showIngredients || e.idMeal !== selectedRecipe) &&
 					<p
 						onMouseEnter={() => showAllIngredients(e.idMeal)}
-						className={'m-0 px-2 py-1 bg- rounded-xl cursor-pointer text-white bg-black'}
+						className={'m-0 px-2 py-1 bg- rounded-xl cursor-pointer text-white bg-black h-fit'}
 					>...
 					</p>
 			}

@@ -11,7 +11,7 @@ export default async function Home({searchParams}: {searchParams: {q: string}}) 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<section className='flex flex-col items-center'>
-				<h1 className='text-4xl font-semibold m-8'>What do you feel like having today</h1>
+				<h1 className='text-4xl font-semibold m-8 text-center'>What do you feel like having today</h1>
 				<SearchBox />
 			</section>
 			<section className='flex flex-wrap justify-center gap-12'>
