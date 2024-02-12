@@ -3,6 +3,7 @@ export default interface Recipe {
 	strMeal: string,
 	strMealThumb: string,
 	strInstructions: string,
+	strYoutube: string,
 	strIngredient1: string,
 	strIngredient2: string,
 	strIngredient3: string,
