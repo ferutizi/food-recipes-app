@@ -43,8 +43,8 @@ export default function Instructions({yt, instructions}: InstructionsProps) {
 				:
 				<>
 					{readMore
-						? <p className='mt-2'>{instructions}</p>
-						: <p className='mt-2'>
+						? <p className='mt-2 whitespace-pre-wrap'>{instructions}</p>
+						: <p className='mt-2 whitespace-pre-wrap'>
 							{instructions?.slice(0, 1000) + ' '}
 							{instructions &&
 							<span
