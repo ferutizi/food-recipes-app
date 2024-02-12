@@ -35,7 +35,7 @@ export default function Instructions({yt, instructions}: InstructionsProps) {
 				? <iframe
 					width="560"
 					height="315"
-					src={`https://www.youtube.com/embed/${embedId(yt)}`}
+					src={`https://www.youtube.com/embed/${embedId(yt as string)}`}
 					title="YouTube video player"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 					allowFullScreen>
@@ -46,11 +46,13 @@ export default function Instructions({yt, instructions}: InstructionsProps) {
 						? <p className='mt-2'>{instructions}</p>
 						: <p className='mt-2'>
 							{instructions?.slice(0, 1000) + ' '}
+							{instructions &&
 							<span
 								className='cursor-pointer underline-offset-1 underline'
 								onClick={() => setReadMore(true)}
-							> {instructions?.length > 1000 ? 'read more...' : ''}
+							> {instructions.length > 1000 ? 'read more...' : ''}
 							</span>
+							}
 						</p>
 					}
 				</>
