@@ -46,6 +46,7 @@ export default function AllIngredients({e}: AllIngredientsProps) {
 			{e.strIngredient5 !== '' && e.strIngredient5 !== null && (!showIngredients || e.idMeal !== selectedRecipe) &&
 					<p
 						onMouseEnter={() => showAllIngredients(e.idMeal)}
+						onClick={() => showAllIngredients(e.idMeal)}
 						className={'m-0 px-2 py-1 bg- rounded-xl cursor-pointer text-white bg-black h-fit'}
 					>...
 					</p>
