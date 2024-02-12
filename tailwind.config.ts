@@ -16,6 +16,12 @@ const config: Config = {
 			boxShadow: {
 				'sm': '0 2px 4px 0 rgb(0 0 0 / 0.25)',
 				'inset': '-4px -4px 4px rgba(0, 0, 0, 0.25)'
+			},
+			width: {
+				'99': '30rem'
+			},
+			height: {
+				'99': '30rem'
 			}
 		},
 	},

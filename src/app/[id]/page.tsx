@@ -30,10 +30,10 @@ export default async function RecipePage({params: {id}}: {params: {id: string}})
 			</Link>
 			<h1 className='text-4xl font-semibold m-8 mt-2'>{recipe?.strMeal}</h1>
 			<article className='grid gap-8 grid-cols-1 lg:grid-cols-2'>
-				<div className='flex justify-center aspect-square'>
-					<img src={recipe?.strMealThumb} title={recipe?.strMeal} alt={recipe?.strMeal} />
+				<div className='flex justify-center'>
+					<img className='w-80 h-80 sm:h-99 sm:w-99 rounded-2xl' src={recipe?.strMealThumb} title={recipe?.strMeal} alt={recipe?.strMeal} />
 				</div>
-				<div className='flex flex-col gap-16'>
+				<div className='flex flex-col gap-16 mx-2 sm:mx-8'>
 					<div>
 						<h2 className='text-2xl font-semibold max-w-72 p-4 ps-0'>Ingredients:</h2>
 						{recipe &&
